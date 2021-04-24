@@ -1,0 +1,30 @@
+//////////////////////////////////////////////////////
+//AMELIORATIONS
+    - separer les deux yeux 
+    - mouvement plus fluide:
+        - plus de conditions ? autre, genre LERP ?
+
+//HOW I PROCESS
+    *C'est le container de l'image contenant les yeux qui se deplace*
+
+    - j'ai exporté mon robot en .svg
+
+    - dans mon file.svg j'ai reperé les calques correspondant aux pupilles (à animer) et au slash (a mettre par dessus)(<g id="nomDuCalque" />)
+
+    - j'ai commenté ces parties pour qu'elles n'apparaissent pas dans l'img de base
+
+    - j'ai crée une div avec les attributs w et h correspondants à la taille de mon img, id= "div-svg"
+        - en CSS j'ai mis mon img svg en background (dont les calques "yeux" et "slash" sont commentés), no repeat, size 100%
+
+    - j'ai crée une div avec les attributs w et h correspondants à la taille de mon img, id= "div-eyes"
+        - j'ai mis dans cette balise:
+            <svg id="svg-paths" version="1.1" preserveAspectRatio="xMinYMin meet" width="100%" height="100%" viewbox="0 0 500 238">
+
+        - j'ai copié dans cette dernière le code correspondant au calque des yeux 
+    
+    - j'ai écrit un script js dans lequel j'attache un event listener "mousemove" a l'objet window afin de récupérer la position de la souris (event.clientX, event.clientY)
+        - passage dans des conditions:
+            - si souris a gauche des yeux, la div qui contient le svg des pupilles se decalle vers la gauche (div.style.left: "-2px")
+            - etc...
+
+    
