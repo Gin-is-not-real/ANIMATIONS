@@ -4,6 +4,24 @@
     - mouvement plus fluide:
         - plus de conditions ? autre, genre LERP ?
 
+    - ressource for svg manipulations in js:
+        https://edutechwiki.unige.ch/fr/SVG_avec_JavaScript
+
+//////////////////////////////////////////////////////
+//HOW I PROCESS 2eme
+    *controle des parties svg pour hidden les pupilles et n'en laisser qu'un type*
+    *le proble est de gerer les deplacements avec le path*
+
+        - j'ai exporté mon robot en .svg en nommant bien mes claques (minuscules et _)
+        - j'ai mis dans un array les id des pupilles
+        - je boucle sur cet array pour attacher des events
+        - au chargement seules les "sleep" sont display
+        - lorsqu'on clic sur le bot, les pup "norm" sont display, timeout, "sleep" display
+
+    *pour agir sur le path, je vais agir sur les coordonnées du path*
+
+
+//////////////////////////////////////////////////////
 //HOW I PROCESS
     *C'est le container de l'image contenant les yeux qui se deplace*
 

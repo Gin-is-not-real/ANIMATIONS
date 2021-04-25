@@ -1,50 +1,18 @@
-#div-svg {
-    left: 0px;
-    top: 0px;
-    background: url("bot.svg");
-    background-size: 100%;
-    background-repeat: no-repeat;
-
-    display: inline-block;
-    position: absolute;
-    width: 500px;
-    padding-bottom: 100%;
-    vertical-align: middle;
-    overflow: hidden;
-}
-#div-slash {
-    left: 0px;
-    top: 0px;
-
-    display: inline-block;
-    position: absolute;
-    width: 500px;
-    padding-bottom: 100%;
-    vertical-align: middle;
-    overflow: hidden;
-}
-#div-eyes {
-    left: 0px;
-    top: 0px;
-
-    display: inline-block;
-    position: absolute;
-    width: 500px;
-    padding-bottom: 100%;
-    vertical-align: middle;
-    overflow: hidden;
-}
-.eyes {
+/* .eyes {
     display: inline-block;
     position: absolute;
     top: 0;
     left: 0;
+    transition: all 0.55s ease; 
+
 }
 .eyes {
     fill: #414042;
     transition: all 0.55s ease;
 }
 .eyes:hover {
+    cursor: pointer;
+
     fill: #ff0000;
     transition: all 0.55s ease; 
-}
+} */

@@ -1,0 +1,58 @@
+
+
+    <path d="M121,130  H0  V0  h121  V130 z M1,129 h119 V1 H1 V129 z"/>
+        (x0.5,y0.5; x120,y0.5; x120, y130; x0.5, y130)
+
+        "moveTo x121, y130; 
+        horTo x0, 
+        vertTo y0;
+        horOf x121, 
+        vertTo y130; z
+        
+        "moveTo x1, y129;
+        horOf x119, 
+        vertTo y1;
+        horTo x1, 
+        vertTo y129, z"
+
+	<path d="M501,130 H380 V0 h121 V130 z M 381,129 h119 V1 H381 V129 z"/>
+
+MOVE TO
+M x, y: absolues 
+m dx, dy: distance relative a la pos courante
+
+LINETO
+L x, y
+l xdx, dy 
+H: horizontal abs
+h: horizontal rel
+V: vertical abs
+v: vertical rel
+
+CURVETO
+QUADRATIQUE
+Q cx, cy, x, y 
+    cx, cy -> coord absolues du point de controle 
+    x, y -> coord absolues du pnt d'arrivée
+
+q dcx, dcy, dx, dy 
+    dcx, dcy -> coord du point de controle relatives au point courant 
+    dx, dy -> coord relatives de ce point par rapport au pnt courant
+
+CUBIQUE
+C c1x, c1y c2x, c2y x, y 
+c dc1x, dc1y dc2x, dc2y dx, dy
+
+T et S sont plus simples:
+T x, y  ou t dx, dy 
+S cx, cy x, y   ou  s dcx, dcy dx, dy 
+
+ARCTO
+A rx, ry xAxisRotate LargeArcFlag, SweepFlag x, y
+rx ry -> rayon sur les axes x et y 
+
+LargeArcFlag 0 à 1 -> déterminer si le plus petit (0) ou le plus grand (1) arc possible doit être dessiné
+
+SweepFlag à 0 ou 1 -> définit le sens de balayage de la courbe : horaire (1) ou anti-horaire (0) ; et enfin x et y sont les coordonnées de destination
+
+z: close path 
