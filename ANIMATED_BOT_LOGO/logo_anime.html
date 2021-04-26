@@ -12,13 +12,16 @@
 <body>
     <main>
         <div id="count"></div>
-        <object id="obj-bot-svg" type="image/svg+xml" data="botfull.svg"></object>
+        <div id="svg-container">
+            <object id="obj-bot-svg" type="image/svg+xml" data="botfull.svg"></object>
+        </div>
     </main>
 </body>
 
 <script type="text/javascript">
 /////////////////////////////////////////////
 //SVG MANIPUTLATION
+var humorState = "sleep";
 const svg = document.getElementById("obj-bot-svg");
 var pupilsElts = [];
 
@@ -46,8 +49,25 @@ svg.addEventListener("load", function() {
         let current = fullSvg.getElementById(elt);
         pupilsElts.push(current);
     })
+    
     pupilDisplayOnly("sleep");
 })
+
+function splitPathInstruction(paths) {
+    console.log(paths);
+
+    let arr = [];
+    paths.forEach(path => {
+        let instruction = path.getAttribute("d");
+        instruction.replace("-", ",-");
+
+        console.log(instruction);
+        let splited = instruction.split(",");
+        arr.push(splited);
+    })
+    
+    console.log(arr);
+}
 
 /////////////////////////////////////////////
 //TIMER
@@ -86,6 +106,7 @@ window.ontouchstart = resetTime;
 window.onclick = resetTime; 
 window.onkeypress = resetTime;
 window.onmousemove = resetTime; 
+// window.addEventListener("mousemove", resetTime);
 window.onmousedown = resetTime;  
 
 /////////////////////////////////////////////
@@ -94,8 +115,14 @@ function getState() {
     let actuallyDisplayed = whichPupAreDisplay();
     let arr = actuallyDisplayed[0].id.split("_");
 
-    console.log("get state", arr[arr.length - 1]);
+    console.log("get state ", arr[arr.length - 1]);
+
     return arr[arr.length - 1];
+}
+
+function setHumorState(state) {
+    humorState = state;
+    console.log("humorState", humorState);
 }
 
 function whichPupAreDisplay() {
@@ -126,12 +153,15 @@ function pupilDisplayOnly(str) {
 function angerTheBot() {
     console.log("anger");
     pupilDisplayOnly("angry");
+    setHumorState("angry");
     // botReturnToNormal();
 }
 
 function awakeTheBot() {
     console.log("awake");
     pupilDisplayOnly("norm");
+    setHumorState("norm");
+
     // botReturnToSleep();
 }
 
@@ -149,6 +179,7 @@ function furyTheBot() {
 function botReturnToNormal() {
         console.log("return to normal");
         pupilDisplayOnly("norm");
+        setHumorState("norm");
 
         whichPupAreDisplay().forEach(path => {
             normColorEyes(path);
@@ -158,6 +189,7 @@ function botReturnToNormal() {
 function botReturnToSleep() {
         console.log("return to sleep");
         pupilDisplayOnly("sleep");
+        setHumorState("sleep");
 }
 
 
@@ -177,19 +209,112 @@ function clickOnBot() {
 }
 
 
-
 function redEyes(path) {
     console.log("red");
         path.style.fill = "#ff0000";
         path.style.transition = "fill 2s ease";
-    }
+}
 
 function normColorEyes(path) {
     console.log("normal eyes color");
 
-        path.style.fill = "#414042";
-        path.style.transition = "fill 4s ease";
+    path.style.fill = "#414042";
+    path.style.transition = "fill 4s ease";
+}
+
+
+
+let svgContainer = document.querySelector("#svg-container");
+svgContainer.addEventListener("mousemove", function(e) {
+    console.log(e)
+    resetTime();
+    test(e);
+})
+let body = document.querySelector("body");
+window.addEventListener("mousemove", function(e) {
+    resetTime();
+    test(e)
+    // if(humorState === "norm") {
+    //     splitPathInstruction(whichPupAreDisplay());
+
+    //     console.log(e.clientX, e.clientY);
+    //     if(e.clientX < 180) {
+    //         pupilsElts[0].setAttribute("d", "M210.033, 124.789c0, 6.339-5.131, 11.465-11.464, 11.465c-6.338, 0 -11.465, -5.126 -11.465, -11.465c0 -6.331, 5.127 -11.464, 11.465 -11.464C204.902, 113.325, 210.033, 118.458, 210.033, 124.789z");
+    //     }
+    //     else if(e.clientX > 180 && e.clientX < 287) {
+    //         pupilsElts[0].setAttribute("d", "M215.033,124.789c0,6.339-5.131,11.465-11.464,11.465c-6.338,0-11.465-5.126-11.465-11.465c0-6.331,5.127-11.464,11.465-11.464C209.902,113.325,215.033,118.458,215.033,124.789z");
+    //     }
+    //     else if(e.clientX > 287) {
+    //         pupilsElts[0].setAttribute("d", "M220.033, 124.789c0,6.339-5.131,11.465-11.464, 11.465c-6.338,0-11.465,-5.126-11.465,-11.465c0-6.331,5.127-11.464,11.465 -11.464C214.902, 113.325, 220.033, 118.458, 220.033,124.789z");
+    //     }
+    // }
+}); 
+function test(e) {
+    if(humorState === "norm") {
+        // splitPathInstruction(whichPupAreDisplay());
+
+        console.log(e.clientX, e.clientY);
+        if(e.clientX < 180) {
+            pupilsElts[0].setAttribute("d", "M210.033, 124.789c0, 6.339-5.131, 11.465-11.464, 11.465c-6.338, 0 -11.465, -5.126 -11.465, -11.465c0 -6.331, 5.127 -11.464, 11.465 -11.464C204.902, 113.325, 210.033, 118.458, 210.033, 124.789z");
+        }
+        else if(e.clientX > 180 && e.clientX < 287) {
+            pupilsElts[0].setAttribute("d", "M215.033,124.789c0,6.339-5.131,11.465-11.464,11.465c-6.338,0-11.465-5.126-11.465-11.465c0-6.331,5.127-11.464,11.465-11.464C209.902,113.325,215.033,118.458,215.033,124.789z");
+        }
+        else if(e.clientX > 287) {
+            pupilsElts[0].setAttribute("d", "M220.033, 124.789c0,6.339-5.131,11.465-11.464, 11.465c-6.338,0-11.465,-5.126-11.465,-11.465c0-6.331,5.127-11.464,11.465 -11.464C214.902, 113.325, 220.033, 118.458, 220.033,124.789z");
+        }
     }
+}
+function followMouse(clientX, clientY) {
+    console.log(clientX, clientY);
+
+        if(clientX < 180) {
+            
+        }
+        else if(clientX > 180 && clientX < 287) {
+        }
+        else if(clientX > 287) {
+            console.log("!!!!");
+
+            // pupilsElts[0].setAttribute("d", "M220.033, 124.789c0, 6.339-5.131, 11.465-11.464, 11.465c-6.338, 0 -11.465, -5.126 -11.465, -11.465c0 -6.331, 5.127 -11.464, 11.465 -11.464C214.902, 113.325, 220.033, 118.458, 220.033, 124.789z");
+        }
+
+        // if(clientY < 95) {
+        //     divEyes.style.top = "-4px";
+        // }
+        // else if(clientY > 95 && clientY < 135) {
+        //     divEyes.style.top = "0";
+        // }
+        // else if(clientY > 135) {
+        //     divEyes.style.top = "4px";
+        // }
+} 
+//////////////////////////////////////////////////////////
+//STOCK GARBAGE
+    // window.addEventListener("mousemove", function(e) {
+    //     console.log(e.clientX, e.clientY);
+function followMouse(e) {
+    if(e.clientX < 180) {
+            divEyes.style.left = "-4px";
+        }
+        else if(e.clientX > 180 && e.clientX < 287) {
+            divEyes.style.left = "0";
+        }
+        else if(e.clientX > 287) {
+            divEyes.style.left = "4px";
+        }
+
+        if(e.clientY < 95) {
+            divEyes.style.top = "-4px";
+        }
+        else if(e.clientY > 95 && e.clientY < 135) {
+            divEyes.style.top = "0";
+        }
+        else if(e.clientY > 135) {
+            divEyes.style.top = "4px";
+        }
+
+} 
 
 </script>
 </html>

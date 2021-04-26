@@ -19,8 +19,14 @@
         - lorsqu'on clic sur le bot, les pup "norm" sont display, timeout, "sleep" display
 
     *pour agir sur le path, je vais agir sur les coordonnées du path*
+        - I CAN:
+            - soit envoyer les coordonnées brutes selon la position de la souris 
+            - soit faire decouper et interpreter les coordonnées du path pour agir dessus
 
-
+        - I WANT:
+            - recuperer coord souris quand mousemove (event.clientX, event.clientY)
+            - 
+            
 //////////////////////////////////////////////////////
 //HOW I PROCESS
     *C'est le container de l'image contenant les yeux qui se deplace*
